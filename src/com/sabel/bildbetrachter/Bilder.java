@@ -4,6 +4,8 @@ import jdk.management.resource.internal.inst.SocketOutputStreamRMHooks;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Bilder extends JFrame {
 
@@ -15,7 +17,8 @@ public class Bilder extends JFrame {
     private Button bPrev;
     private Button bNext;
     private JLabel jLabel;
-    private Icon icon;
+    private Icon[] icons;
+    private int bildNr;
 
     public static void main(String[] args) {
 
@@ -38,10 +41,51 @@ public class Bilder extends JFrame {
 
     private void initEvents() {
 
+        bPrev.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (bildNr > 0) {
+                    zeigeBild(bildNr - 1);
+                } else {
+                    zeigeBild(icons.length - 1);
+                }
+            }
+        });
+
+        bNext.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (bildNr < icons.length - 1) {
+                    zeigeBild(bildNr + 1);
+                } else {
+                    zeigeBild(0);
+                }
+            }
+        });
+
+        for (int i = 0; i < icons.length; i++) {
+            int finalI = i;
+            jradios[i].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    zeigeBild(finalI);
+                }
+            });
+        }
     }
 
 
+    private void zeigeBild(int i) {
+        jLabel.setIcon(icons[i]);
+        jradios[i].setSelected(true);
+        bildNr = i;
+    }
+
     private void initComponents() {
+        icons = new Icon[4];
+        for (int i = 0; i < 4; i++) {
+            icons[i] = new ImageIcon("bilder\\Bild" + (i + 1) + ".jpg");
+        }
 
         jpWest = new JPanel();
         jpWest.setLayout(new BoxLayout(jpWest, BoxLayout.Y_AXIS));
@@ -52,6 +96,7 @@ public class Bilder extends JFrame {
             bGroupWest.add(jradios[i]);
             jpWest.add(jradios[i]);
         }
+        jradios[0].setSelected(true);
         this.add(jpWest, BorderLayout.WEST);
 
         jpSouth = new JPanel();
@@ -63,11 +108,10 @@ public class Bilder extends JFrame {
 
 
         jLabel = new JLabel();
-        icon = new ImageIcon("bilder\\Bild1.jpg");
-        jLabel.setIcon(icon);
+        jLabel.setIcon(icons[0]);
         JScrollPane jScrollPane = new JScrollPane(jLabel);
         this.add(jScrollPane, BorderLayout.CENTER);
-
-
     }
+
+
 }
