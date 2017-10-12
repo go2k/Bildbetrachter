@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 public class Bilder extends JFrame {
 
@@ -82,6 +83,7 @@ public class Bilder extends JFrame {
     }
 
     private void initComponents() {
+
         icons = new Icon[4];
         for (int i = 0; i < 4; i++) {
             icons[i] = new ImageIcon("bilder\\Bild" + (i + 1) + ".jpg");
@@ -105,7 +107,6 @@ public class Bilder extends JFrame {
         bNext = new Button("Nächstes Bild");
         jpSouth.add(bNext);
         this.add(jpSouth, BorderLayout.SOUTH);
-
 
         jLabel = new JLabel();
         jLabel.setIcon(icons[0]);
