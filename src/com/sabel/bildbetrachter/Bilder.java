@@ -61,7 +61,7 @@ public class Bilder extends JFrame {
         jpSouth.add(bNext);
         this.add(jpSouth, BorderLayout.SOUTH);
 
-        jpCenter = new JPanel();
+
         jLabel = new JLabel();
         icon = new ImageIcon("bilder\\Bild1.jpg");
         jLabel.setIcon(icon);
