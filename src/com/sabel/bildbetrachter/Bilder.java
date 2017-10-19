@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import java.net.URL;
 
 public class Bilder extends JFrame {
 
@@ -22,9 +23,7 @@ public class Bilder extends JFrame {
     private int bildNr;
 
     public static void main(String[] args) {
-
         new Bilder();
-
     }
 
     public Bilder() throws HeadlessException {
@@ -65,7 +64,7 @@ public class Bilder extends JFrame {
         });
 
         for (int i = 0; i < icons.length; i++) {
-            int j = i;
+             final int j = i;
             jradios[i].addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -91,9 +90,10 @@ public class Bilder extends JFrame {
 
     private void initComponents() {
 
+        //URL url = getClass().getResource("/bilder/bild1.jpg");
         icons = new Icon[4];
         for (int i = 0; i < icons.length; i++) {
-            icons[i] = new ImageIcon("bilder\\Bild" + (i + 1) + ".jpg");
+            icons[i] = new ImageIcon(getClass().getResource("/bilder/Bild" + (i + 1) + ".jpg"));
         }
 
         jpWest = new JPanel();
