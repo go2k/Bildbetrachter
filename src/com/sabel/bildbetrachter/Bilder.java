@@ -1,11 +1,11 @@
 package com.sabel.bildbetrachter;
 
+import javafx.stage.FileChooser;
 import jdk.management.resource.internal.inst.SocketOutputStreamRMHooks;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.io.File;
 
 public class Bilder extends JFrame {
@@ -30,7 +30,7 @@ public class Bilder extends JFrame {
     public Bilder() throws HeadlessException {
 
         super("Bilder");
-        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         this.setSize(400, 400);
         this.setLocationRelativeTo(null);
 
@@ -65,14 +65,21 @@ public class Bilder extends JFrame {
         });
 
         for (int i = 0; i < icons.length; i++) {
-            int finalI = i;
+            int j = i;
             jradios[i].addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    zeigeBild(finalI);
+                    zeigeBild(j);
                 }
             });
         }
+
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                endDlg();
+            }
+        });
     }
 
 
@@ -85,7 +92,7 @@ public class Bilder extends JFrame {
     private void initComponents() {
 
         icons = new Icon[4];
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < icons.length; i++) {
             icons[i] = new ImageIcon("bilder\\Bild" + (i + 1) + ".jpg");
         }
 
@@ -108,11 +115,19 @@ public class Bilder extends JFrame {
         jpSouth.add(bNext);
         this.add(jpSouth, BorderLayout.SOUTH);
 
-        jLabel = new JLabel();
-        jLabel.setIcon(icons[0]);
+        jLabel = new JLabel(icons[0]);
+        //jLabel.setIcon(icons[0]);
         JScrollPane jScrollPane = new JScrollPane(jLabel);
         this.add(jScrollPane, BorderLayout.CENTER);
     }
 
 
+    private void endDlg() {
+        if (JOptionPane.showConfirmDialog(this, "Wollen sie das Programm wirklich beenden?", "Programm Beenden?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            System.exit(NORMAL);
+        }
+
+
+    }
 }
+
