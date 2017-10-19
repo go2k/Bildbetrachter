@@ -3,7 +3,6 @@
     <output-path>$PROJECT_DIR$/out/artifacts/Bildbetrachter_jar</output-path>
     <root id="archive" name="Bildbetrachter.jar">
       <element id="module-output" name="Bildbetrachter" />
-      <element id="dir-copy" path="$PROJECT_DIR$/src/bilder" />
     </root>
   </artifact>
 </component>
