@@ -22,9 +22,7 @@ public class Bilder extends JFrame {
     private int bildNr;
 
     public static void main(String[] args) {
-
         new Bilder();
-
     }
 
     public Bilder() throws HeadlessException {
@@ -33,7 +31,6 @@ public class Bilder extends JFrame {
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setSize(400, 400);
         this.setLocationRelativeTo(null);
-
         initComponents();
         initEvents();
         this.setVisible(true);
@@ -75,7 +72,6 @@ public class Bilder extends JFrame {
         }
     }
 
-
     private void zeigeBild(int i) {
         jLabel.setIcon(icons[i]);
         jradios[i].setSelected(true);
@@ -86,7 +82,8 @@ public class Bilder extends JFrame {
 
         icons = new Icon[4];
         for (int i = 0; i < 4; i++) {
-            icons[i] = new ImageIcon("bilder\\Bild" + (i + 1) + ".jpg");
+            icons[i] = new ImageIcon(getClass().getResource("/bilder/Bild" + (i + 1) + ".jpg"));
+            //icons[i] = new ImageIcon("bilder/Bild" + (i + 1) + ".jpg");
         }
 
         jpWest = new JPanel();
