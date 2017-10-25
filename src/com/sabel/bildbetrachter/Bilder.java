@@ -62,7 +62,7 @@ public class Bilder extends JFrame {
         });
 
         for (int i = 0; i < icons.length; i++) {
-            int finalI = i;
+            final int finalI = i;
             jradios[i].addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
